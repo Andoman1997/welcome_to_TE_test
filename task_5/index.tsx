@@ -21,6 +21,7 @@ const ComponentOne = () => {
 };
 
 const ComponentTwo = () => {
+    
     const { data } = useSWR('post', fetchOnePost);
 
     return data ? (
