@@ -1,48 +1,61 @@
 import { useState } from "react";
 
-export const Block1 = ({ mouseEnterCallbak, imgSrc, imgAlt }) => {
+type CommonBlockProps = {
+  mouseEnterCallback: () => void;
+  children: React.ReactNode;
+};
+
+const CommonBlock = ({ mouseEnterCallback, children }: CommonBlockProps) => {
   const [isActive, setActive] = useState(false);
 
   const mouseEnterHandler = () => {
     setActive(true);
-    mouseEnterCallbak();
+    mouseEnterCallback();
   };
 
   return (
     <div onMouseEnter={mouseEnterHandler} className={isActive ? "active" : ""}>
-      <img src={imgSrc} alt={imgAlt} />
+      {children}
     </div>
   );
 };
 
-export const Block2 = ({ mouseEnterCallbak, content }) => {
-  const [isActive, setActive] = useState(false);
+export const Block1 = ({
+  mouseEnterCallback,
+  imgSrc,
+  imgAlt,
+}: {
+  mouseEnterCallback: () => void;
+  imgSrc: string;
+  imgAlt: string;
+}) => (
+  <CommonBlock mouseEnterCallback={mouseEnterCallback}>
+    <img src={imgSrc} alt={imgAlt} />
+  </CommonBlock>
+);
 
-  const mouseEnterHandler = () => {
-    setActive(true);
-    mouseEnterCallbak();
-  };
+export const Block2 = ({
+  mouseEnterCallback,
+  content,
+}: {
+  mouseEnterCallback: () => void;
+  content: string;
+}) => (
+  <CommonBlock mouseEnterCallback={mouseEnterCallback}>
+    <p>{content}</p>
+  </CommonBlock>
+);
 
-  return (
-    <div onMouseEnter={mouseEnterHandler} className={isActive ? "active" : ""}>
-      <p>{content}</p>
-    </div>
-  );
-};
-
-export const Block3 = ({ mouseEnterCallbak, userData }) => {
-  const [isActive, setActive] = useState(false);
-
-  const mouseEnterHandler = () => {
-    setActive(true);
-    mouseEnterCallbak();
-  };
-
-  return (
-    <div onMouseEnter={mouseEnterHandler} className={isActive ? "active" : ""}>
-      <address>
-        country: {userData.country}, street: {userData.street}
-      </address>
-    </div>
-  );
-};
+export const Block3 = ({
+  mouseEnterCallback,
+  userData,
+}: {
+  mouseEnterCallback: () => void;
+  userData: { country: string; street: string };
+}) => (
+  <CommonBlock mouseEnterCallback={mouseEnterCallback}>
+    <address>
+      country: {userData.country}, street: {userData.street}
+    </address>
+  </CommonBlock>
+);
