@@ -16,6 +16,7 @@ const CommonBlock = ({ mouseEnterCallback, children }: CommonBlockProps) => {
   return (
     <div onMouseEnter={mouseEnterHandler} className={isActive ? "active" : ""}>
       {children}
+      
     </div>
   );
 };
