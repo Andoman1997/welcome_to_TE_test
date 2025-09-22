@@ -6,6 +6,7 @@ type CommonBlockProps = {
 };
 
 const CommonBlock = ({ mouseEnterCallback, children }: CommonBlockProps) => {
+  
   const [isActive, setActive] = useState(false);
 
   const mouseEnterHandler = () => {
